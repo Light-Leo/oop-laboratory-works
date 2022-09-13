@@ -1,6 +1,6 @@
 # Object-Oriented-Programming Course
 
-# Run Code
+## Run Code
 
 ```bash
 # Step-1: Navigate into right directory
