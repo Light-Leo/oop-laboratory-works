@@ -1,0 +1,635 @@
+# ===========================================================
+# Problem 1A
+
+## A. Write a class named Point2d. Point2d should contain two member variables of type double: m_x, and m_y, both defaulted to 0.0. Provide a constructor and a print function.
+
+#### **Solution:**
+
+```c++
+#include <iostream>
+
+using namespace std;
+
+class Point2d
+{
+private:
+  double m_x{};
+  double m_y{};
+
+public:
+  Point2d(double x = 0.0, double y = 0.0)
+      : m_x{x}, m_y{y}
+  {
+  }
+
+  void print() const
+  {
+    cout << "Point2d(" << m_x << ", " << m_y << ")\n";
+  }
+};
+
+int main()
+{
+  Point2d first{};
+  Point2d second{3.0, 4.0};
+  first.print();
+  second.print();
+
+  return 0;
+}
+```
+
+# ===========================================================
+# Problem 1B
+
+## A. Now add a member function named distanceTo that takes another Point2d as a parameter, and calculates the distance between them. Given two points (x1, y1) and (x2, y2), the distance between them can be calculated as std::sqrt(x1 x2) _ (x1-x2)+0y1- y2) _ (y1 - y2). The std:sqrt function lives in header cmath.
+
+#### **Solution:**
+
+```c++
+#include <cmath>
+#include <iostream>
+
+using namespace std;
+
+class Point2d
+{
+private:
+  double m_x{};
+  double m_y{};
+
+public:
+  Point2d(double x = 0.0, double y = 0.0)
+      : m_x{x}, m_y{y}
+  {
+  }
+
+  void print() const
+  {
+    cout << "Point2d(" << m_x << " , " << m_y << ")\n";
+  }
+
+  double distanceTo(const Point2d &other) const
+  {
+    return sqrt((m_x - other.m_x) * (m_x - other.m_x) + (m_y - other.m_y) * (m_y - other.m_y));
+  }
+};
+
+int main()
+{
+  Point2d first{};
+  Point2d second{3.0, 4.0};
+  first.print();
+  second.print();
+  cout << "Distance between two points: " << first.distanceTo(second) << '\n';
+
+  return 0;
+}
+```
+
+# ===========================================================
+# Problem 1C
+
+## A. c) Change function distanceTo from a member function to a non-member friend function that takes two Points as parameters. Also rename it "distanceFrom"
+
+#### **Solution:**
+
+```c++
+#include <cmath>
+#include <iostream>
+
+using namespace std;
+
+class Point2d
+{
+private:
+  double m_x{};
+  double m_y{};
+
+public:
+  Point2d(double x = 0.0, double y = 0.0)
+      : m_x{x}, m_y{y}
+  {
+  }
+
+  void print() const
+  {
+    cout << "Point2d(" << m_x << " , " << m_y << ")\n";
+  }
+
+  friend double distanceFrom(const Point2d &x, const Point2d &y);
+};
+
+double distanceFrom(const Point2d &a, const Point2d &b)
+{
+  return sqrt((a.m_x - b.m_x) * (a.m_x - b.m_x) + (a.m_y - b.m_y) * (a.m_y - b.m_y));
+}
+
+int main()
+{
+  Point2d first{};
+  Point2d second{3.0, 4.0};
+  first.print();
+  second.print();
+  cout << "Distance between two points: " << distanceFrom(first, second) << '\n';
+
+  return 0;
+}
+```
+
+# ===========================================================
+# Problem 2
+
+## A. Write a destructor for this class:
+
+#### **Solution:**
+
+```c++
+#include <iostream>
+
+using namespace std;
+
+class HelloWorld
+{
+private:
+  char *m_data{};
+
+public:
+  HelloWorld()
+  {
+    m_data = new char[14];
+    const char *init{"Hello, World!"};
+    for (int i = 0; i < 14; ++i)
+      m_data[i] = init[i];
+  }
+
+  ~HelloWorld()
+  {
+    delete[] m_data;
+  }
+
+  void print() const
+  {
+    cout << m_data << '\n';
+  }
+};
+
+int main()
+{
+  HelloWorld hello{};
+  hello.print();
+
+  return 0;
+}
+```
+
+# ===========================================================
+# Problem 3A
+
+## A. First, let's create an enumeration of monster types named Monster T ype. Include the following monster types: Dragon, Goblin, Ogre, Orc, Skeleton, Troll, Vampire, and Zombie. Add an additional max_monster_types enum so we can count how many enumerators there are
+
+#### **Solution:**
+
+```c++
+enum class MonsterType
+{
+  dragon,
+  goblin,
+  ogre,
+  orc,
+  skeleton,
+  troll,
+  vampire,
+  zombie,
+  max_monster_types
+};
+```
+
+# ===========================================================
+# Problem 3B
+
+## A. Now, let's create our Monster class. Our Monster will have 4 attributes (member variables): a type (MonsterType), a name (std::string), a roar (std::string), and the number of hit points (int). Create a Monster class that has these 4 member variables.
+
+#### **Solution:**
+
+```c++
+#include <string>
+
+using namespace std;
+
+enum class MonsterType
+{
+  dragon,
+  goblin,
+  ogre,
+  orc,
+  skeleton,
+  troll,
+  vampire,
+  zombie,
+  max_monster_types
+};
+
+class Monster
+{
+private:
+  MonsterType m_type{};
+  string m_name{};
+  string m_roar{};
+  int m_hitPoints{};
+};
+```
+
+# ===========================================================
+# Problem 3C
+
+## A. enum MonsterType is specific to Monster, so move the enum inside the class as a public declaration. When the enum is inside the class, "MonsterType" can be renamed "Type" since the context is already Monster.
+
+#### **Solution:**
+
+```c++
+#include <string>
+
+using namespace std;
+
+class Monster
+{
+public:
+  enum class Type
+  {
+    dragon,
+    goblin,
+    ogre,
+    orc,
+    skeleton,
+    troll,
+    vampire,
+    zombie,
+    max_monster_types
+  };
+
+private:
+  Type m_type{};
+  string m_name{};
+  string m_roar{};
+  int m_hitPoints{};
+};
+```
+
+# ===========================================================
+# Problem 3D
+
+## A. Create a constructor that allows you to initialize all of the member variables.
+
+#### **Solution:**
+
+```c++
+#include <string>
+
+using namespace std;
+
+class Monster
+{
+public:
+  enum class Type
+  {
+    dragon,
+    goblin,
+    ogre,
+    orc,
+    skeleton,
+    troll,
+    vampire,
+    zombie,
+    max_monster_types
+  };
+
+private:
+  Type m_type{};
+  string m_name{};
+  string m_roar{};
+  int m_hitPoints{};
+
+public:
+  Monster(Type type, const string &name, const string &roar, int hitPoints)
+      : m_type{type}, m_name{name}, m_roar{roar}, m_hitPoints{hitPoints}
+  {
+  }
+};
+
+int main()
+{
+  Monster skeleton{Monster::Type::skeleton, "Bones", "*rattle*", 4};
+
+  return 0;
+}
+```
+
+# ===========================================================
+# Problem 3E
+
+## A. Now we want to be able to print our monster s0 we can validate it's correct. To do that, we're going to need to write a function that convertsa Monster:Type into a string. Write that function (called getTypeString0), as well as a print) member function.
+
+#### **Solution:**
+
+```c++
+#include <iostream>
+#include <string>
+#include <string_view>
+
+using namespace std;
+
+class Monster
+{
+public:
+  enum class Type
+  {
+    dragon,
+    goblin,
+    ogre,
+    orc,
+    skeleton,
+    troll,
+    vampire,
+    zombie,
+    max_monster_types
+  };
+
+private:
+  Type m_type{};
+  string m_name{};
+  string m_roar{};
+  int m_hitPoints{};
+
+public:
+  Monster(Type type, const string &name, const string &roar, int hitPoints)
+      : m_type{type}, m_name{name}, m_roar{roar}, m_hitPoints{hitPoints}
+  {
+  }
+
+  string_view getTypeString() const
+  {
+    switch (m_type)
+    {
+    case Type::dragon:
+      return "dragon";
+    case Type::goblin:
+      return "goblin";
+    case Type::ogre:
+      return "ogre";
+    case Type::orc:
+      return "orc";
+    case Type::skeleton:
+      return "skeleton";
+    case Type::troll:
+      return "troll";
+    case Type::vampire:
+      return "vampire";
+    case Type::zombie:
+      return "zombie";
+    default:
+      return "???";
+    }
+  }
+
+  void print() const
+  {
+    cout << m_name << " the " << getTypeString() << " has " << m_hitPoints << " hit points and says " << m_roar << '\n';
+  }
+};
+
+int main()
+{
+  Monster skeleton{Monster::Type::skeleton, "Bones", "*rattle*", 4};
+  skeleton.print();
+
+  return 0;
+}
+```
+
+# ===========================================================
+# Problem 3F
+
+## A. Now we can create a random monster generator. Let's consider how our MonsterGenerator class will vwork. Ideally, we'll ask it to give us a Monster, and it will create a random one for us. We don't need more than one MonsterGenerator. This is a good candidate for a static class (one in which all functions are static). Create a static MonsterGenerator class. Create a static function named generateMonster(. This should return a Monster. For now, make it return anonymous Monster(Mon ster : : Type: : skeleton, "Bones", "_rattle_", 4);
+
+#### **Solution:**
+
+```c++
+#include <iostream>
+#include <string>
+#include <string_view>
+
+using namespace std;
+
+class Monster
+{
+public:
+  enum class Type
+  {
+    dragon,
+    goblin,
+    ogre,
+    orc,
+    skeleton,
+    troll,
+    vampire,
+    zombie,
+    max_monster_types
+  };
+
+private:
+  Type m_type{};
+  string m_name{};
+  string m_roar{};
+  int m_hitPoints{};
+
+public:
+  Monster(Type type, const string &name, const string &roar, int hitPoints)
+      : m_type{type}, m_name{name}, m_roar{roar}, m_hitPoints{hitPoints}
+  {
+  }
+
+  string_view getTypeString() const
+  {
+    switch (m_type)
+    {
+    case Type::dragon:
+      return "dragon";
+    case Type::goblin:
+      return "goblin";
+    case Type::ogre:
+      return "ogre";
+    case Type::orc:
+      return "orc";
+    case Type::skeleton:
+      return "skeleton";
+    case Type::troll:
+      return "troll";
+    case Type::vampire:
+      return "vampire";
+    case Type::zombie:
+      return "zombie";
+    default:
+      return "???";
+    }
+  }
+
+  void print() const
+  {
+    cout << m_name << " the " << getTypeString() << " has " << m_hitPoints << " hit points and says " << m_roar << '\n';
+  }
+};
+
+class MonsterGenerator
+{
+public:
+  static Monster generateMonster()
+  {
+    return {Monster::Type::skeleton, "Bones", "*rattle*", 4};
+  }
+};
+
+int main()
+{
+  Monster m{MonsterGenerator::generateMonster()};
+  m.print();
+
+  return 0;
+}
+```
+
+# ===========================================================
+# Problem 3G
+
+## A. Now, MonsterGenerator needs to generate some random attributes. To do that, well need to make use of this handy function:
+
+#### **Solution:**
+
+```c++
+class MonsterGenerator
+{
+public:
+  static int getRandomNumber(int min, int max)
+  {
+    static constexpr double fraction{1.0 / (RAND_MAX + 1.0)};
+    return min + static_cast<int>((max - min + 1) * (rand() * fraction));
+  }
+
+  static Monster generateMonster()
+  {
+    return {Monster::Type::skeleton, "Bones", "*rattle*", 4};
+  }
+};
+```
+
+# ===========================================================
+# Problem 3H
+
+## A. Now edit function generateMonster() to generate a random Monster: Type (between 0 and Monster:Type:max_monster types-1) and a random hit points (between 1 and 100). This should be fairly straightforward. Once you've done that, define two static fixed arrays of size 6 inside the function (named sunames and s_roars) and initialize them with 6 names and 6 sounds of your choice. Pick a random name and roar from these arrays.
+
+#### **Solution:**
+
+```c++
+#include <array>
+#include <ctime>
+#include <cstdlib>
+#include <iostream>
+#include <string>
+#include <string_view>
+
+using namespace std;
+
+class Monster
+{
+public:
+  enum class Type
+  {
+    dragon,
+    goblin,
+    ogre,
+    orc,
+    skeleton,
+    troll,
+    vampire,
+    zombie,
+    max_monster_types
+  };
+
+private:
+  Type m_type{};
+  string m_name{};
+  string m_roar{};
+  int m_hitPoints{};
+
+public:
+  Monster(Type type, const string &name, const string &roar, int hitPoints)
+      : m_type{type}, m_name{name}, m_roar{roar}, m_hitPoints{hitPoints}
+  {
+  }
+
+  string_view getTypeString() const
+  {
+    switch (m_type)
+    {
+    case Type::dragon:
+      return "dragon";
+    case Type::goblin:
+      return "goblin";
+    case Type::ogre:
+      return "ogre";
+    case Type::orc:
+      return "orc";
+    case Type::skeleton:
+      return "skeleton";
+    case Type::troll:
+      return "troll";
+    case Type::vampire:
+      return "vampire";
+    case Type::zombie:
+      return "zombie";
+    default:
+      return "???";
+    }
+  }
+
+  void print() const
+  {
+    cout << m_name << " the " << getTypeString() << " has " << m_hitPoints << " hit points and says " << m_roar << '\n';
+  }
+};
+
+class MonsterGenerator
+{
+public:
+  static int getRandomNumber(int min, int max)
+  {
+    static constexpr double fraction{1.0 / (RAND_MAX + 1.0)};
+    return min + static_cast<int>((max - min + 1) * (rand() * fraction));
+  }
+
+  static Monster generateMonster()
+  {
+    auto type{static_cast<Monster::Type>(getRandomNumber(0, static_cast<int>(Monster::Type::max_monster_types) - 1))};
+    int hitPoints{getRandomNumber(1, 100)};
+
+    static constexpr array s_names{"Blarg", "Moog", "Pksh", "Tyrn", "Mort", "Hans"};
+    static constexpr array s_roars{"*ROAR*", "*peep*", "*squeal*", "*whine*", "*hum*", "*burp*"};
+
+    auto name{s_names[getRandomNumber(0, static_cast<int>(s_names.size() - 1))]};
+    auto roar{s_roars[getRandomNumber(0, static_cast<int>(s_roars.size() - 1))]};
+
+    return {type, name, roar, hitPoints};
+  }
+};
+
+int main()
+{
+  srand(static_cast<unsigned int>(time(nullptr)));
+  rand();
+
+  Monster m{MonsterGenerator::generateMonster()};
+  m.print();
+
+  return 0;
+}
+```

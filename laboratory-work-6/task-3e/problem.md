@@ -1,0 +1,80 @@
+# Problem 3E
+
+## A. Now we want to be able to print our monster s0 we can validate it's correct. To do that, we're going to need to write a function that convertsa Monster:Type into a string. Write that function (called getTypeString0), as well as a print) member function.
+
+#### **Solution:**
+
+```c++
+#include <iostream>
+#include <string>
+#include <string_view>
+
+using namespace std;
+
+class Monster
+{
+public:
+  enum class Type
+  {
+    dragon,
+    goblin,
+    ogre,
+    orc,
+    skeleton,
+    troll,
+    vampire,
+    zombie,
+    max_monster_types
+  };
+
+private:
+  Type m_type{};
+  string m_name{};
+  string m_roar{};
+  int m_hitPoints{};
+
+public:
+  Monster(Type type, const string &name, const string &roar, int hitPoints)
+      : m_type{type}, m_name{name}, m_roar{roar}, m_hitPoints{hitPoints}
+  {
+  }
+
+  string_view getTypeString() const
+  {
+    switch (m_type)
+    {
+    case Type::dragon:
+      return "dragon";
+    case Type::goblin:
+      return "goblin";
+    case Type::ogre:
+      return "ogre";
+    case Type::orc:
+      return "orc";
+    case Type::skeleton:
+      return "skeleton";
+    case Type::troll:
+      return "troll";
+    case Type::vampire:
+      return "vampire";
+    case Type::zombie:
+      return "zombie";
+    default:
+      return "???";
+    }
+  }
+
+  void print() const
+  {
+    cout << m_name << " the " << getTypeString() << " has " << m_hitPoints << " hit points and says " << m_roar << '\n';
+  }
+};
+
+int main()
+{
+  Monster skeleton{Monster::Type::skeleton, "Bones", "*rattle*", 4};
+  skeleton.print();
+
+  return 0;
+}
+```
