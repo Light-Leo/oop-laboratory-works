@@ -1,5 +1,5 @@
-#include "Vector3d.h"
-#include "Point3d.h"
+#include "Vector3d.h" // For creating Vector3d object
+#include "Point3d.h"  // For creating Vector3d object
 
 int main()
 {

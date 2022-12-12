@@ -1,6 +1,9 @@
+// Header file that defines the Vector3d class
+
 #ifndef VECTOR3D_H
 #define VECTOR3D_H
 
+// Include for declaring Point3d::moveByVector() as a friend
 #include "Point3d.h"
 
 class Vector3d

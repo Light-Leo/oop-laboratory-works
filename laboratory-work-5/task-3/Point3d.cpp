@@ -1,5 +1,7 @@
-#include "Point3d.h"
-#include "Vector3d.h"
+// Member functions of the Point3d class defined here
+
+#include "Point3d.h"  // Point3d class defined here
+#include "Vector3d.h" // For the parameter of the function moveByVector()
 #include <iostream>
 
 using namespace std;
@@ -9,6 +11,7 @@ Point3d::Point3d(double x, double y, double z)
 {
 }
 
+// Adds the vector components to the corresponding point coordinates
 void Point3d::moveByVector(const Vector3d &v)
 {
   m_x += v.m_x;

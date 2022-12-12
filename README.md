@@ -23,6 +23,7 @@ start app.exe
 - [Types of Operator Overloading in C++](https://www.geeksforgeeks.org/types-of-operator-overloading-in-c/){:target="\_blank"}
 - [std::string | Section: Member types](https://cplusplus.com/reference/string/string/){:target="\_blank"}
 - [UML Association vs Aggregation vs Composition](https://www.visual-paradigm.com/guide/uml-unified-modeling-language/uml-aggregation-vs-composition/)
+- [Header files in C/C++ and its uses](https://www.geeksforgeeks.org/header-files-in-c-cpp-and-its-uses/)
 
 ## About the repository
 

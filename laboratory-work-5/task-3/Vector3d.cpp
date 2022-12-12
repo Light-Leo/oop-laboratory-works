@@ -1,4 +1,6 @@
-#include "Vector3d.h"
+// Member functions of the Vector3d class defined here
+
+#include "Vector3d.h" // Vector3d class defined in this file
 #include <iostream>
 
 using namespace std;
