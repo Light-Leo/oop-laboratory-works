@@ -12,6 +12,17 @@ g++ -o app app.cpp
 start app.exe
 ```
 
+## Useful links
+
+### Libraries
+
+- [std::gcd | C++ inbuilt function for finding GCD](https://www.geeksforgeeks.org/stdgcd-c-inbuilt-function-finding-gcd/)
+
+### Topics
+
+- [Types of Operator Overloading in C++](https://www.geeksforgeeks.org/types-of-operator-overloading-in-c/)
+- [std::string | Section: Member types](https://cplusplus.com/reference/string/string/)
+
 ## About the repository
 
 This repository represents all the completed laboratory works for `OOP Course` of 2 year.
