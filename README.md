@@ -16,12 +16,12 @@ start app.exe
 
 ### Libraries
 
-- [std::gcd | C++ inbuilt function for finding GCD](https://www.geeksforgeeks.org/stdgcd-c-inbuilt-function-finding-gcd/)
+- [std::gcd | C++ inbuilt function for finding GCD](https://www.geeksforgeeks.org/stdgcd-c-inbuilt-function-finding-gcd/){:target="\_blank"}
 
 ### Topics
 
-- [Types of Operator Overloading in C++](https://www.geeksforgeeks.org/types-of-operator-overloading-in-c/)
-- [std::string | Section: Member types](https://cplusplus.com/reference/string/string/)
+- [Types of Operator Overloading in C++](https://www.geeksforgeeks.org/types-of-operator-overloading-in-c/){:target="\_blank"}
+- [std::string | Section: Member types](https://cplusplus.com/reference/string/string/){:target="\_blank"}
 
 ## About the repository
 
